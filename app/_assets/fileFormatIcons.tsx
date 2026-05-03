@@ -1,0 +1,218 @@
+import { ReactNode } from "react";
+
+const fileFormatIcons: { types: string[]; icon: ReactNode }[] = [
+  {
+    types: [
+      "mp3",
+      "wav",
+      "flac",
+      "aac",
+      "ogg",
+      "m4a",
+      "opus",
+      "wma",
+      "aiff",
+      "alac",
+    ],
+    icon: (
+      <svg width={40} height={40} fill="none" viewBox="0 0 40 40">
+        <path
+          fill="#DD2590"
+          d="M4 4a4 4 0 0 1 4-4h16l12 12v24a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"
+        />
+        <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity={0.3} />
+        <path
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M17.2 28v-7.763c0-.321 0-.482.058-.612a.67.67 0 0 1 .24-.282c.118-.079.277-.105.593-.158l5.867-.978c.427-.071.64-.107.807-.045a.67.67 0 0 1 .347.293c.088.154.088.371.088.804v7.408M17.2 28a2 2 0 1 1-4 0 2 2 0 0 1 4 0m8-1.333a2 2 0 1 1-4 0 2 2 0 0 1 4 0"
+        />
+      </svg>
+    ),
+  },
+  {
+    types: ["doc", "docx", "odt", "rtf", "txt", "wpd", "pages"],
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        fill="none">
+        <path
+          fill="#155EEF"
+          d="M4 4a4 4 0 0 1 4-4h16l12 12v24a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"
+        />
+        <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity=".3" />
+        <path
+          stroke="#fff"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M12.8 20h14.4m-14.4 3.2h14.4m-14.4 3.2h14.4m-14.4 3.2H24"
+        />
+      </svg>
+    ),
+  },
+  {
+    types: ["pdf"],
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        fill="none">
+        <path
+          fill="#D92D20"
+          d="M4 4a4 4 0 0 1 4-4h16l12 12v24a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"
+        />
+        <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity=".3" />
+        <path
+          fill="#fff"
+          d="M11.75 32v-6.546h2.582q.744 0 1.268.285.524.281.8.783.277.498.277 1.15 0 .653-.28 1.151a1.94 1.94 0 0 1-.816.777q-.53.278-1.285.278H12.65v-1.11h1.423q.399 0 .658-.137a.9.9 0 0 0 .39-.386q.13-.25.13-.572 0-.326-.13-.57a.88.88 0 0 0-.39-.38q-.262-.137-.665-.137h-.933V32zm8.147 0h-2.32v-6.546h2.339q.987 0 1.7.394.712.39 1.096 1.122.387.731.387 1.75 0 1.024-.387 1.759-.384.735-1.102 1.128-.717.393-1.713.393m-.937-1.186h.879q.614 0 1.032-.217.422-.22.633-.68.214-.464.214-1.196 0-.726-.214-1.186a1.4 1.4 0 0 0-.63-.677q-.418-.218-1.032-.218h-.882zM24.124 32v-6.546h4.334v1.142h-2.95v1.56h2.662v1.14h-2.662V32z"
+        />
+      </svg>
+    ),
+  },
+  {
+    types: ["jpg", "jpeg", "png", "gif", "bmp", "webp", "tiff", "svg"],
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        fill="none">
+        <path
+          fill="#7F56D9"
+          d="M4 4a4 4 0 0 1 4-4h16l12 12v24a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"
+        />
+        <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity=".3" />
+        <path
+          stroke="#fff"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M24.667 30h.673c.648 0 .971 0 1.15-.135a.67.67 0 0 0 .263-.492c.013-.223-.166-.493-.525-1.031l-2.007-3.01c-.297-.446-.445-.668-.632-.746a.67.67 0 0 0-.511 0c-.187.078-.335.3-.632.745l-.496.745M24.667 30l-5.123-7.4c-.295-.426-.442-.638-.626-.713a.67.67 0 0 0-.502 0c-.184.075-.332.287-.626.713l-3.965 5.726c-.375.542-.563.813-.552 1.039a.67.67 0 0 0 .261.498c.18.137.509.137 1.168.137zM26 20a2 2 0 1 1-4 0 2 2 0 0 1 4 0"
+        />
+      </svg>
+    ),
+  },
+  {
+    types: ["mp4", "avi", "mkv", "mov", "wmv", "webm", "flv"],
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        fill="none">
+        <path
+          fill="#155EEF"
+          d="M4 4a4 4 0 0 1 4-4h16l12 12v24a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"
+        />
+        <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity=".3" />
+        <g clip-path="url(#video_svg__a)">
+          <path
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M13.333 24h13.334m-13.334-3.333h3.334m6.666 0h3.334m-13.334 6.666h3.334m6.666 0h3.334m-10 3.334V17.333m6.666 13.334V17.333m-6.8 13.334h6.934c1.12 0 1.68 0 2.108-.218a2 2 0 0 0 .874-.874c.218-.428.218-.988.218-2.108v-6.934c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874c-.428-.218-.988-.218-2.108-.218h-6.934c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874c-.218.428-.218.988-.218 2.108v6.934c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874c.428.218.988.218 2.108.218"
+          />
+        </g>
+        <defs>
+          <clipPath id="video_svg__a">
+            <path fill="#fff" d="M12 16h16v16H12z" />
+          </clipPath>
+        </defs>
+      </svg>
+    ),
+  },
+  {
+    types: [
+      "html",
+      "css",
+      "js",
+      "py",
+      "java",
+      "cpp",
+      "c",
+      "cs",
+      "php",
+      "ts",
+      "json",
+      "xml",
+      "sh",
+    ],
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        fill="none">
+        <path
+          fill="#444CE7"
+          d="M4 4a4 4 0 0 1 4-4h16l12 12v24a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"
+        />
+        <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity=".3" />
+        <path
+          stroke="#fff"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M23.333 27.333 26.667 24l-3.334-3.333m-6.666 0L13.333 24l3.334 3.333M21.333 18l-2.666 12"
+        />
+      </svg>
+    ),
+  },
+  {
+    types: ["xls", "xlsx", "ods", "csv"],
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        fill="none">
+        <path
+          fill="#079455"
+          d="M4 4a4 4 0 0 1 4-4h16l12 12v24a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"
+        />
+        <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity=".3" />
+        <path
+          stroke="#fff"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M12.8 24.8h14.4m-14.4 0v-3.2a1.6 1.6 0 0 1 1.6-1.6h3.2m-4.8 4.8V28a1.6 1.6 0 0 0 1.6 1.6h3.2m9.6-4.8V28a1.6 1.6 0 0 1-1.6 1.6h-8m9.6-4.8v-3.2a1.6 1.6 0 0 0-1.6-1.6h-8m0 0v9.6"
+        />
+      </svg>
+    ),
+  },
+  {
+    types: ["ppt", "pptx"],
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        fill="none">
+        <path
+          fill="#E62E05"
+          d="M4 4a4 4 0 0 1 4-4h16l12 12v24a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"
+        />
+        <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity=".3" />
+        <path
+          fill="#fff"
+          d="M11.736 32v-6.546h2.582q.745 0 1.27.285.523.281.798.783.279.498.278 1.15 0 .653-.281 1.151a1.94 1.94 0 0 1-.815.777q-.53.278-1.285.278h-1.646v-1.11h1.422q.4 0 .659-.137a.9.9 0 0 0 .39-.386q.13-.25.13-.572 0-.326-.13-.57a.88.88 0 0 0-.39-.38q-.262-.137-.665-.137h-.933V32zm5.827 0v-6.546h2.582q.745 0 1.27.285.523.281.798.783.279.498.278 1.15 0 .653-.28 1.151a1.94 1.94 0 0 1-.816.777q-.53.278-1.285.278h-1.646v-1.11h1.423q.399 0 .658-.137a.9.9 0 0 0 .39-.386 1.2 1.2 0 0 0 .13-.572 1.2 1.2 0 0 0-.13-.57.88.88 0 0 0-.39-.38q-.262-.137-.665-.137h-.933V32zm5.578-5.404v-1.142h5.376v1.142h-2.004V32h-1.368v-5.404z"
+        />
+      </svg>
+    ),
+  },
+];
+
+const translateFormatToIcon = (format: string): ReactNode => {
+  return fileFormatIcons.map(
+    (icon) => icon.types.includes(format) && icon.icon,
+  );
+};
+
+export default translateFormatToIcon;
