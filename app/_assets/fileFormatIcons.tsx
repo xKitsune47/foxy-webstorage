@@ -46,9 +46,9 @@ const fileFormatIcons: { types: string[]; icon: ReactNode }[] = [
         <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity=".3" />
         <path
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
           d="M12.8 20h14.4m-14.4 3.2h14.4m-14.4 3.2h14.4m-14.4 3.2H24"
         />
       </svg>
@@ -89,9 +89,9 @@ const fileFormatIcons: { types: string[]; icon: ReactNode }[] = [
         <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity=".3" />
         <path
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
           d="M24.667 30h.673c.648 0 .971 0 1.15-.135a.67.67 0 0 0 .263-.492c.013-.223-.166-.493-.525-1.031l-2.007-3.01c-.297-.446-.445-.668-.632-.746a.67.67 0 0 0-.511 0c-.187.078-.335.3-.632.745l-.496.745M24.667 30l-5.123-7.4c-.295-.426-.442-.638-.626-.713a.67.67 0 0 0-.502 0c-.184.075-.332.287-.626.713l-3.965 5.726c-.375.542-.563.813-.552 1.039a.67.67 0 0 0 .261.498c.18.137.509.137 1.168.137zM26 20a2 2 0 1 1-4 0 2 2 0 0 1 4 0"
         />
       </svg>
@@ -113,9 +113,9 @@ const fileFormatIcons: { types: string[]; icon: ReactNode }[] = [
         <g clip-path="url(#video_svg__a)">
           <path
             stroke="#fff"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
             d="M13.333 24h13.334m-13.334-3.333h3.334m6.666 0h3.334m-13.334 6.666h3.334m6.666 0h3.334m-10 3.334V17.333m6.666 13.334V17.333m-6.8 13.334h6.934c1.12 0 1.68 0 2.108-.218a2 2 0 0 0 .874-.874c.218-.428.218-.988.218-2.108v-6.934c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874c-.428-.218-.988-.218-2.108-.218h-6.934c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874c-.218.428-.218.988-.218 2.108v6.934c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874c.428.218.988.218 2.108.218"
           />
         </g>
@@ -156,9 +156,9 @@ const fileFormatIcons: { types: string[]; icon: ReactNode }[] = [
         <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity=".3" />
         <path
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
           d="M23.333 27.333 26.667 24l-3.334-3.333m-6.666 0L13.333 24l3.334 3.333M21.333 18l-2.666 12"
         />
       </svg>
@@ -179,9 +179,9 @@ const fileFormatIcons: { types: string[]; icon: ReactNode }[] = [
         <path fill="#fff" d="m24 0 12 12h-8a4 4 0 0 1-4-4z" opacity=".3" />
         <path
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
           d="M12.8 24.8h14.4m-14.4 0v-3.2a1.6 1.6 0 0 1 1.6-1.6h3.2m-4.8 4.8V28a1.6 1.6 0 0 0 1.6 1.6h3.2m9.6-4.8V28a1.6 1.6 0 0 1-1.6 1.6h-8m9.6-4.8v-3.2a1.6 1.6 0 0 0-1.6-1.6h-8m0 0v9.6"
         />
       </svg>

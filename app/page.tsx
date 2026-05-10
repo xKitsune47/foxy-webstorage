@@ -1,7 +1,8 @@
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
+"use client";
+
 import ListLayout from "./_components/ListLayout";
-import { DocumentIcon } from "@heroicons/react/24/outline";
 import FileHorizontal from "./_components/FileHorizontal";
+import FileUpload from "./_components/FileUpload";
 
 export default function Home() {
   const tempFiles: {
@@ -39,7 +40,7 @@ export default function Home() {
   return (
     <ListLayout>
       <div className="flex flex-col gap-4">
-        <h3 className="text-3xl">Newest</h3>
+        <h3 className="text-3xl">New files</h3>
 
         <div className="flex flex-row justify-between">
           {tempFiles.map((file) => {
@@ -52,6 +53,17 @@ export default function Home() {
               />
             );
           })}
+        </div>
+
+        <h3 className="text-3xl">Files</h3>
+        <div className="flex flex-row min-h-full">
+          <div className="w-1/2">
+            <FileUpload
+              onFiles={(files) => {
+                console.log("Wybrane pliki:", files);
+              }}
+            />
+          </div>
         </div>
       </div>
     </ListLayout>
