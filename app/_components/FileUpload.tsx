@@ -21,7 +21,7 @@ export default function FileUpload({ onFiles, multiple = true }: Props) {
 
   const handleFiles = useCallback(
     (fileList: FileList | File[]) => {
-      const arr = Array.from(fileList as any) as File[];
+      const arr = Array.from(fileList as File[]) as File[];
       setFiles(arr);
       onFiles?.(arr);
     },
