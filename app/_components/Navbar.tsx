@@ -62,6 +62,7 @@ const Navbar = () => {
             key={el.link}
             icon={el.icon}
             additionalStyle={expanded ? "" : "justify-center"}
+            expanded={expanded}
           />
         );
       })}
@@ -84,7 +85,7 @@ const Navbar = () => {
         )}
 
         <span
-          className={`p-2 border-2 rounded-xl flex flex-row gap-4 text-lg font-semibold hover:bg-orange-100 hover:border-orange-200 transition-all duration-300 items-center bg-white border-slate-200 cursor-pointer ${expanded && "w-1/3"} w-full justify-center lg:block hidden`}
+          className={`p-2 border-2 rounded-xl lg:flex flex-row gap-4 text-lg font-semibold hover:bg-orange-100 hover:border-orange-200 transition-all duration-300 items-center bg-white border-slate-200 cursor-pointer w-full justify-center hidden ${expanded && "w-1/3"} `}
           onClick={() => {
             setExpanded(!expanded);
           }}>

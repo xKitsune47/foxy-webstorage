@@ -22,7 +22,7 @@ const Header = ({ handleSearch, handleFieldChange, query }: Props) => {
 
   return (
     <div className="flex flex-row justify-between items-center">
-      <h2 className="text-xl md:text-4xl font-semibold">
+      <h2 className="text-xl md:text-2xl lg:text-4xl font-semibold">
         {subpages.map((page) => page.link === pathname && page.text)}
       </h2>
       <form

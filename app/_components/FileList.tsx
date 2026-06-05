@@ -7,10 +7,15 @@ import translateFormatToIcon from "../helpers/fileFormatIcons";
 import fileWeightFormatter from "../helpers/fileWeightFormatter";
 import fileNameFormat from "../helpers/fileNameFormatter";
 
-type Props = { files: File[] };
+type Props = { files: File[]; placeholderText?: string };
 
-const FileList = ({ files }: Props) => {
-  return (
+const FileList = ({
+  files,
+  placeholderText = "No files added yet...",
+}: Props) => {
+  return !files || files.length === 0 ? (
+    <span>{placeholderText}</span>
+  ) : (
     <div className="flex flex-col gap-4 grow h-0 min-h-full overflow-y-auto">
       {files.map((file) => {
         return (

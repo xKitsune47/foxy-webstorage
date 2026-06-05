@@ -8,7 +8,7 @@ import { maxFilesHorizontal } from "./helpers/numericalConstraints";
 import FileList from "./_components/FileList";
 
 export default function Home() {
-  const tempFiles: File[] = [
+  const files: File[] = [
     {
       fileName: "Lorem ipsum",
       format: "pdf",
@@ -64,10 +64,10 @@ export default function Home() {
   return (
     <ListLayout>
       <div className="flex flex-col lg:gap-4 gap-2 flex-1 min-h-0">
-        <h3 className="md:text-3xl text-xl">New files</h3>
+        <h3 className="lg:text-3xl md:text-2xl text-xl">New files</h3>
 
         <div className="hidden xl:flex xl:flex-row justify-between max:lg gap-2">
-          {tempFiles.map((file, i) => {
+          {files.map((file, i) => {
             return (
               i < maxFilesHorizontal && (
                 <FileHorizontal
@@ -82,7 +82,7 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col xl:hidden justify-between max:lg gap-2">
-          {tempFiles.map((file, i) => {
+          {files.map((file, i) => {
             return (
               i < maxFilesHorizontal - 2 && (
                 <FileHorizontal
@@ -96,14 +96,14 @@ export default function Home() {
           })}
         </div>
 
-        <h3 className="md:text-3xl text-xl">Files</h3>
+        <h3 className="lg:text-3xl md:text-2xl text-xl">Files</h3>
         <div className="flex flex-col lg:flex-row flex-1 min-h-0 gap-8">
           <FileUpload
             onFiles={(files) => {
               console.log("CHOSEN FILE:", files);
             }}
           />
-          <FileList files={tempFiles} />
+          <FileList files={files} />
         </div>
       </div>
     </ListLayout>
