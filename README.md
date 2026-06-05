@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Foxy webstorage
 
-## Getting Started
+## AI disclaimer
 
-First, run the development server:
+AI to human written code ratio is around 10/90. I've used AI to help me with problems that I got stuck on or explain something if I didn't understand "What", "Why", "When".
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+I've tried and will keep trying to keep it as much of a handcrafted spaghetti as possible :)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## App overwiev
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`Foxy webstorage` is a selfhost-oriented project that lets you:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- store files,
+- access/preview files,
+- manage files
+- share files to the outside world via a direct link (with passkey already in the URL or by prompting the person opening for a passkey).
 
-## Learn More
+![alt text](readme_assets/image.png)
 
-To learn more about Next.js, take a look at the following resources:
+### Storing files:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+TBD
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Accessing/previewing files:
 
-## Deploy on Vercel
+TBD
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Managing files
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+TBD
+
+### Sharing files
+
+TBD
+
+## Selfhosting guide
+
+TBD
+
+## Technologies used
+
+- Typescript
+- Next.js
+
+## Opensource?
+
+This project is free to use for everyone, if you want you can do whatever you want with it. Only thing I'd love you to do is to credit me, as the creator of the base.
