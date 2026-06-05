@@ -16,10 +16,10 @@ const HeaderLink = ({ to, text, additionalStyle, icon }: Props) => {
   return (
     <Link
       href={to}
-      className={`w-full p-2 border-2 rounded-xl flex flex-row gap-4 text-lg font-semibold hover:bg-orange-100 hover:border-orange-200 transition-all duration-300 items-center ${additionalStyle} ${pathname === to ? "bg-orange-100 border-orange-200" : "bg-white border-slate-200"}`}
+      className={`w-full p-2 border-2 rounded-xl flex flex-row gap-4 text-lg font-semibold hover:bg-orange-100 hover:border-orange-200 transition-all duration-300 items-center ${additionalStyle} ${pathname === to ? "bg-orange-100 border-orange-200" : "bg-white border-slate-200"} max-lg:justify-center`}
       style={pathname === to ? { pointerEvents: "none" } : {}}
       replace>
-      {icon} {text}
+      {icon} <span className="hidden lg:block">{text}</span>
     </Link>
   );
 };

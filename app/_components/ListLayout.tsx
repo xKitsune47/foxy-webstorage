@@ -25,7 +25,9 @@ const ListLayout = ({ children }: Props) => {
   };
 
   return (
-    <BoxRoundedWrapper additionalStyle="w-full px-8 py-8 flex flex-col gap-12">
+    <BoxRoundedWrapper
+      additionalStyle="max-w-full px-8 py-8 lg:gap-12 gap-4 flex-1 min-h-0"
+      dynamic={false}>
       <Header
         handleFieldChange={handleFieldChange}
         handleSearch={handleFileSearch}

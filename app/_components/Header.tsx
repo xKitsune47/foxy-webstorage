@@ -21,8 +21,8 @@ const Header = ({ handleSearch, handleFieldChange, query }: Props) => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-row justify-between">
-      <h2 className="text-4xl font-semibold">
+    <div className="flex flex-row justify-between items-center">
+      <h2 className="text-xl md:text-4xl font-semibold">
         {subpages.map((page) => page.link === pathname && page.text)}
       </h2>
       <form
@@ -35,7 +35,7 @@ const Header = ({ handleSearch, handleFieldChange, query }: Props) => {
         </button>
         <input
           type="text"
-          className="border-2 border-slate-200 rounded-xl py-2 pr-2 pl-10 w-80
+          className="border-2 border-slate-200 rounded-xl py-2 pr-2 pl-10 md:w-80 w-40
            focus:outline-none focus:ring-0 transition-all duration-300 focus:border-orange-300 text-lg"
           value={query}
           onChange={handleFieldChange}
