@@ -76,10 +76,12 @@ const Navbar = () => {
             <progress
               className="w-full rounded-full"
               id="disk-space"
-              value={(diskSpace?.spaceUsed / diskSpace?.totalSpace) * 100}
-              max={100}>
-              {(diskSpace?.totalSpace - diskSpace?.spaceUsed) /
-                diskSpace?.totalSpace}
+              value={`${(diskSpace?.spaceUsed / diskSpace?.totalSpace) * 100}`}
+              max="100">
+              {`${
+                (diskSpace?.totalSpace - diskSpace?.spaceUsed) /
+                diskSpace?.totalSpace
+              }`}
             </progress>
           </div>
         )}
