@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import FileOptions from "./FileOptions";
 import fileWeightFormatter from "../helpers/fileWeightFormatter";
 import fileNameFormat from "../helpers/fileNameFormatter";
@@ -38,13 +38,14 @@ const FilesWrapper = ({
     fileSelected(file.id);
   };
 
-  const handleMouseClick = (e) => {
+  const handleMouseClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    if (e._reactName === "onContextMenu") {
+
+    if (e.type === "contextmenu") {
       setOptionsShown(true);
     }
 
-    if (e._reactName === "onClick" && e.ctrlKey) {
+    if (e.type === "click" && e.ctrlKey) {
       setSelected(!selected);
       fileSelected(file.id);
     }
