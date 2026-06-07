@@ -9,43 +9,44 @@ import React, {
   useState,
 } from "react";
 import { createPortal } from "react-dom";
+import { PopupTypes } from "../helpers/types";
 
 type Props = {
-  fileId?: number;
+  fileId: number;
   anchorRef: RefObject<HTMLElement | null>;
   onClose: () => void;
+  openPopup: (popupType: PopupTypes, fileId: number) => void;
 };
 
 const popupWidth = 272;
 const popupGap = 8;
 
-const FileOptions = ({ fileId, anchorRef, onClose }: Props) => {
+const FileOptions = ({ fileId, anchorRef, onClose, openPopup }: Props) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
   const [positionStyle, setPositionStyle] = useState<CSSProperties>({});
 
-  const closeAndLog = () => {
-    console.log(`clicked file no. ${fileId}`);
-    alert(`clicked file no. ${fileId}`);
-    onClose();
+  const handleOpen = () => {
+    alert("not implemented!");
   };
 
-  const handleOpen = () => {
-    closeAndLog();
-  };
-  const handleEditName = () => {
-    closeAndLog();
-  };
   const handleDownload = () => {
-    closeAndLog();
+    alert("not implemented!");
   };
+
+  const handleEditName = () => {
+    openPopup("name", fileId);
+  };
+
   const handleDetails = () => {
-    closeAndLog();
+    openPopup("details", fileId);
   };
+
   const handleShare = () => {
-    closeAndLog();
+    openPopup("share", fileId);
   };
+
   const handleRemove = () => {
-    closeAndLog();
+    openPopup("delete", fileId);
   };
 
   useEffect(() => {

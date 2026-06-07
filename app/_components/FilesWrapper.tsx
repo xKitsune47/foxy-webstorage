@@ -1,16 +1,29 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FileOptions from "./FileOptions";
 import fileWeightFormatter from "../helpers/fileWeightFormatter";
 import fileNameFormat from "../helpers/fileNameFormatter";
 import translateFormatToIcon from "../helpers/fileFormatIcons";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { File } from "../helpers/types";
+import { File, PopupTypes } from "../helpers/types";
 
-type Props = { listType: "horizontal" | "vertical"; file: File };
+type Props = {
+  listType: "horizontal" | "vertical";
+  file: File;
+  openPopup: (popupType: PopupTypes, fileId: number) => void;
+  fileSelected: (fileId: number) => void;
+  selectedFiles: number[];
+};
 
-const FilesWrapper = ({ listType, file }: Props) => {
+const FilesWrapper = ({
+  listType,
+  file,
+  openPopup,
+  fileSelected,
+  selectedFiles,
+}: Props) => {
   const [optionsShown, setOptionsShown] = useState<boolean>(false);
   const triggerRef = useRef<HTMLDivElement | null>(null);
+  const [selected, setSelected] = useState<boolean>(false);
 
   const optionsVisibility = () => {
     setOptionsShown(!optionsShown);
@@ -20,13 +33,55 @@ const FilesWrapper = ({ listType, file }: Props) => {
     setOptionsShown(false);
   };
 
+  const handleSelectFile = () => {
+    setSelected(!selected);
+    fileSelected(file.id);
+  };
+
+  const handleMouseClick = (e) => {
+    e.preventDefault();
+    if (e._reactName === "onContextMenu") {
+      setOptionsShown(true);
+    }
+
+    if (e._reactName === "onClick" && e.ctrlKey) {
+      setSelected(!selected);
+      fileSelected(file.id);
+    }
+  };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSelected(selectedFiles.includes(file.id));
+  }, [selectedFiles]);
+
   if (listType === "vertical") {
     return (
       <div
         ref={triggerRef}
-        key={file.fileName}
-        className="flex flex-row md:p-4 p-2 border-2 border-slate-200 rounded-xl gap-4 items-center hover:bg-slate-100 transition-all duration-300 cursor-default w-full justify-between">
-        <div className="flex flex-row gap-2 items-center">
+        className={`flex flex-row md:p-4 p-2 border-2 border-slate-200 rounded-xl gap-4 items-center hover:bg-slate-200 transition-all duration-300 cursor-default w-full justify-between ${selected && "bg-slate-200"}`}
+        onClick={handleMouseClick}
+        onContextMenu={handleMouseClick}>
+        <div className="flex flex-row gap-4 items-center">
+          <span
+            className="border border-slate-500 w-5 h-4 rounded-sm bg-white flex items-center justify-center"
+            onClick={handleSelectFile}>
+            {selected && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-4">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m4.5 12.75 6 6 9-13.5"
+                />
+              </svg>
+            )}
+          </span>
           {translateFormatToIcon(file.format)}
           <div className="flex flex-col">
             <span className="text-lg">{fileNameFormat(file.fileName)}</span>
@@ -43,6 +98,7 @@ const FilesWrapper = ({ listType, file }: Props) => {
 
         {optionsShown && (
           <FileOptions
+            openPopup={openPopup}
             fileId={file.id}
             anchorRef={triggerRef}
             onClose={handleClose}
@@ -54,10 +110,30 @@ const FilesWrapper = ({ listType, file }: Props) => {
 
   return (
     <div
-      key={file.fileName}
-      className="relative flex flex-row md:p-4 p-2 border-2 border-slate-200 rounded-xl gap-4 items-center hover:bg-slate-100 transition-all duration-300 cursor-default w-full justify-between"
-      ref={triggerRef}>
+      className={`relative flex flex-row md:p-4 p-2 border-2 border-slate-200 rounded-xl gap-4 items-center hover:bg-slate-200 transition-all duration-300 cursor-default w-full justify-between ${selected && "bg-slate-200"}`}
+      ref={triggerRef}
+      onClick={handleMouseClick}
+      onContextMenu={handleMouseClick}>
       <div className="flex flex-row gap-4 items-center">
+        <span
+          className="border border-slate-500 w-4 h-4 rounded-sm bg-white flex items-center justify-center"
+          onClick={handleSelectFile}>
+          {selected && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-4">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m4.5 12.75 6 6 9-13.5"
+              />
+            </svg>
+          )}
+        </span>
         {translateFormatToIcon(file.format)}
 
         <span className="text-lg">{fileNameFormat(file.fileName)}</span>
@@ -74,6 +150,7 @@ const FilesWrapper = ({ listType, file }: Props) => {
 
       {optionsShown && (
         <FileOptions
+          openPopup={openPopup}
           fileId={file.id}
           anchorRef={triggerRef}
           onClose={handleClose}

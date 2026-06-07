@@ -1,11 +1,21 @@
 import React from "react";
-import { File } from "../helpers/types";
+import { File, PopupTypes } from "../helpers/types";
 import { maxFilesHorizontal } from "../helpers/numericalConstraints";
 import FilesWrapper from "./FilesWrapper";
 
-type Props = { files: File[] };
+type Props = {
+  files: File[];
+  openPopup: (popupType: PopupTypes, fileId: number) => void;
+  fileSelected: (fileId: number) => void;
+  selectedFiles: number[];
+};
 
-const RecentlyAddedFiles = ({ files }: Props) => {
+const RecentlyAddedFiles = ({
+  files,
+  openPopup,
+  fileSelected,
+  selectedFiles,
+}: Props) => {
   return (
     <>
       <h3 className="lg:text-3xl md:text-2xl text-xl">New files</h3>
@@ -13,7 +23,14 @@ const RecentlyAddedFiles = ({ files }: Props) => {
         {files.map((file, i) => {
           return (
             i < maxFilesHorizontal && (
-              <FilesWrapper key={file.id} file={file} listType="vertical" />
+              <FilesWrapper
+                key={file.id}
+                file={file}
+                listType="vertical"
+                openPopup={openPopup}
+                fileSelected={fileSelected}
+                selectedFiles={selectedFiles}
+              />
             )
           );
         })}
@@ -22,7 +39,14 @@ const RecentlyAddedFiles = ({ files }: Props) => {
         {files.map((file, i) => {
           return (
             i < maxFilesHorizontal - 2 && (
-              <FilesWrapper key={file.id} file={file} listType="vertical" />
+              <FilesWrapper
+                key={file.id}
+                file={file}
+                listType="vertical"
+                openPopup={openPopup}
+                fileSelected={fileSelected}
+                selectedFiles={selectedFiles}
+              />
             )
           );
         })}
