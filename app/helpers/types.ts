@@ -3,6 +3,8 @@ interface File {
   fileName: string;
   format: string;
   size: number;
+  shared: boolean;
+  date: Date | number;
 }
 
 type ButtonTypes = "destroy" | "confirm" | "acknowledge";

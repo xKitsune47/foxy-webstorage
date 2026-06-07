@@ -8,6 +8,8 @@ import FilesWrapper from "./_components/FilesWrapper";
 import { ChangeEventHandler, SubmitEventHandler, useState } from "react";
 import RecentlyAddedFiles from "./_components/RecentlyAddedFiles";
 import ScreenPopup from "./_components/ScreenPopup";
+import dateFormatter from "./helpers/dateFormatter";
+import fileWeightFormatter from "./helpers/fileWeightFormatter";
 
 const files: File[] = [
   {
@@ -15,60 +17,120 @@ const files: File[] = [
     fileName: "Lorem ipsum",
     format: "pdf",
     size: 2100000000,
+    date:
+      Date.now() +
+      (Math.random() > 0.5
+        ? -Math.floor(Math.random() * 1000000000)
+        : Math.floor(Math.random() * 1000000000)),
+    shared: Math.random() > 0.5 ? true : false,
   },
   {
     id: 2,
     fileName: "Lorem ipsum",
     format: "mp3",
     size: 210000000,
+    date:
+      Date.now() +
+      (Math.random() > 0.5
+        ? -Math.floor(Math.random() * 1000000000)
+        : Math.floor(Math.random() * 1000000000)),
+    shared: Math.random() > 0.5 ? true : false,
   },
   {
     id: 3,
     fileName: "Lorem ipsum",
     format: "doc",
     size: 21000000,
+    date:
+      Date.now() +
+      (Math.random() > 0.5
+        ? -Math.floor(Math.random() * 1000000000)
+        : Math.floor(Math.random() * 1000000000)),
+    shared: Math.random() > 0.5 ? true : false,
   },
   {
     id: 4,
     fileName: "Lorem ipsum",
     format: "ppt",
     size: 2100000,
+    date:
+      Date.now() +
+      (Math.random() > 0.5
+        ? -Math.floor(Math.random() * 1000000000)
+        : Math.floor(Math.random() * 1000000000)),
+    shared: Math.random() > 0.5 ? true : false,
   },
   {
     id: 5,
     fileName: "Lorem ipsum",
     format: "docx",
     size: 210000,
+    date:
+      Date.now() +
+      (Math.random() > 0.5
+        ? -Math.floor(Math.random() * 1000000000)
+        : Math.floor(Math.random() * 1000000000)),
+    shared: Math.random() > 0.5 ? true : false,
   },
   {
     id: 6,
     fileName: "Lorem ipsum",
     format: "pdf",
     size: 210000,
+    date:
+      Date.now() +
+      (Math.random() > 0.5
+        ? -Math.floor(Math.random() * 1000000000)
+        : Math.floor(Math.random() * 1000000000)),
+    shared: Math.random() > 0.5 ? true : false,
   },
   {
     id: 7,
     fileName: "Lorem ipsum",
     format: "xlsx",
     size: 210000,
+    date:
+      Date.now() +
+      (Math.random() > 0.5
+        ? -Math.floor(Math.random() * 1000000000)
+        : Math.floor(Math.random() * 1000000000)),
+    shared: Math.random() > 0.5 ? true : false,
   },
   {
     id: 8,
     fileName: "Lorem ipsum",
     format: "doc",
     size: 210000,
+    date:
+      Date.now() +
+      (Math.random() > 0.5
+        ? -Math.floor(Math.random() * 1000000000)
+        : Math.floor(Math.random() * 1000000000)),
+    shared: Math.random() > 0.5 ? true : false,
   },
   {
     id: 9,
     fileName: "Lorem ipsum",
     format: "ppt",
     size: 210000,
+    date:
+      Date.now() +
+      (Math.random() > 0.5
+        ? -Math.floor(Math.random() * 1000000000)
+        : Math.floor(Math.random() * 1000000000)),
+    shared: Math.random() > 0.5 ? true : false,
   },
   {
     id: 10,
     fileName: "Lorem ipsum",
     format: "docx",
     size: 210000,
+    date:
+      Date.now() +
+      (Math.random() > 0.5
+        ? -Math.floor(Math.random() * 1000000000)
+        : Math.floor(Math.random() * 1000000000)),
+    shared: Math.random() > 0.5 ? true : false,
   },
 ];
 
@@ -83,9 +145,18 @@ export default function Home() {
   const [fileDetailsPopup, setFileDetailsPopup] = useState<boolean>(false);
   const [fileID, setFileID] = useState<number | null>(null);
   const [filesSelected, setFilesSelected] = useState<number[]>([]);
+  const [singularFile, setSingularFile] = useState<File | null>(null);
 
   const handleOpenPopup = (popupType: PopupTypes, fileId: number) => {
+    const temporaryFile = files.find((file) => file.id === fileId);
     setFileID(fileId);
+
+    if (!temporaryFile) {
+      setFileID(null);
+      return;
+    }
+
+    setSingularFile(temporaryFile);
 
     if (popupType === "delete") {
       setFileDeletionPopup(true);
@@ -137,14 +208,12 @@ export default function Home() {
         file.fileName.toLowerCase().includes(searchQuery.toLowerCase()),
       ),
     );
-    console.log(searchQuery);
   };
 
   const handleFieldChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setSearchQuery(e?.target.value);
 
     setSearched(false);
-    console.log(e.target.value);
   };
 
   const handleSelectFile = (fileId: number) => {
@@ -208,56 +277,62 @@ export default function Home() {
         </div>
       )}
 
-      {fileDeletionPopup && (
+      {fileDeletionPopup && singularFile && (
         <ScreenPopup
           cancelPopup={handleClosePopup}
           confirmAction={handleDeleteFile}>
-          <h3 className="text-xl">deletion</h3>
+          <h3 className="text-xl font-semibold">deletion</h3>
           <p>placeholder</p>
         </ScreenPopup>
       )}
-      {fileSharePopup && (
+      {fileSharePopup && singularFile && (
         <ScreenPopup
           cancelPopup={handleClosePopup}
           confirmAction={handleShareFile}>
-          <h3 className="text-xl">share</h3>
+          <h3 className="text-xl font-semibold">share</h3>
           <p>placeholder</p>
         </ScreenPopup>
       )}
-      {fileNameChangePopup && (
+      {fileNameChangePopup && singularFile && (
         <ScreenPopup
           cancelPopup={handleClosePopup}
           confirmAction={handleChangeNameFile}>
-          <h3 className="text-xl">name change</h3>
+          <h3 className="text-xl font-semibold">name change</h3>
           <p>placeholder</p>
         </ScreenPopup>
       )}
-      {fileDetailsPopup && (
+      {fileDetailsPopup && singularFile && (
         <ScreenPopup
           cancelPopup={handleClosePopup}
           confirmAction={handleDetailsFile}>
-          <h3 className="text-xl">File details</h3>
-          <div className="flex flex-row justify-between gap-4 w-full">
+          <h3 className="text-xl font-semibold">File details</h3>
+          <div className="flex flex-row justify-between gap-16 w-full">
             <p className="">Name</p>
-            <p>placeholder</p>
+            <p>{singularFile.fileName}</p>
           </div>
           <hr className="w-full" />
 
-          <div className="flex flex-row justify-between gap-4 w-full">
-            <p>Date created</p>
-            <p>placeholder</p>
+          <div className="flex flex-row justify-between gap-16 w-full">
+            <p className="">Format</p>
+            <p>.{singularFile.format}</p>
           </div>
           <hr className="w-full" />
 
-          <div className="flex flex-row justify-between gap-4 w-full">
-            <p>Weight</p>
-            <p>placeholder</p>
+          <div className="flex flex-row justify-between gap-16 w-full">
+            <p>Date</p>
+            <p>{dateFormatter(new Date(singularFile.date))}</p>
           </div>
           <hr className="w-full" />
 
-          <div className="flex flex-row justify-between gap-4 w-full">
+          <div className="flex flex-row justify-between gap-16 w-full">
+            <p>Size</p>
+            <p>{fileWeightFormatter(singularFile.size)}</p>
+          </div>
+          <hr className="w-full" />
+
+          <div className="flex flex-row justify-between gap-16 w-full">
             <p>Shared</p>
-            <p>placeholder</p>
+            <p>{singularFile.shared ? "Yes" : "No"}</p>
           </div>
         </ScreenPopup>
       )}
