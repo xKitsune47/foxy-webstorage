@@ -53,8 +53,8 @@ export default function FileUpload({ onFiles, multiple = true }: Props) {
         onClick={onClick}
         role="button"
         tabIndex={0}
-        className={`h-full border-2 p-8 border-dashed rounded-2xl bg-slate-50 cursor-pointer flex flex-col items-center justify-center text-center transition-all duration-150 ${
-          isDragging ? "border-orange-400 bg-slate-50" : "border-slate-300"
+        className={`h-full border-2 p-8 border-dashed rounded-2xl bg-slate-50 cursor-pointer flex flex-col items-center justify-center text-center transition-all duration-150 hover:border-orange-300 ${
+          isDragging ? "border-orange-300 bg-slate-50" : "border-slate-300"
         }`}>
         <input
           ref={inputRef}

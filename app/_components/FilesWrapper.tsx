@@ -65,7 +65,7 @@ const FilesWrapper = ({
         onContextMenu={handleMouseClick}>
         <div className="flex flex-row gap-4 items-center">
           <span
-            className="border border-slate-500 w-5 h-4 rounded-sm bg-white flex items-center justify-center"
+            className="border border-slate-500 hover:border-slate-400 w-5 h-4 rounded-sm bg-white flex items-center justify-center transition-all duration-200"
             onClick={handleSelectFile}>
             {selected && (
               <svg
