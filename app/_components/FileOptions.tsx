@@ -23,7 +23,9 @@ const popupGap = 8;
 
 const FileOptions = ({ fileId, anchorRef, onClose, openPopup }: Props) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
-  const [positionStyle, setPositionStyle] = useState<CSSProperties>({});
+  const [positionStyle, setPositionStyle] = useState<CSSProperties | null>(
+    null,
+  );
 
   const handleOpen = () => {
     alert("not implemented!");
@@ -178,6 +180,10 @@ const FileOptions = ({ fileId, anchorRef, onClose, openPopup }: Props) => {
       ),
     },
   ];
+
+  if (!positionStyle) {
+    return null;
+  }
 
   return createPortal(
     <div
