@@ -5,6 +5,7 @@ import fileNameFormat from "../helpers/fileNameFormatter";
 import translateFormatToIcon from "../helpers/fileFormatIcons";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { File, PopupTypes } from "../helpers/types";
+import dateFormatter from "../helpers/dateFormatter";
 
 type Props = {
   listType: "horizontal" | "vertical";
@@ -65,7 +66,7 @@ const FilesWrapper = ({
         onContextMenu={handleMouseClick}>
         <div className="flex flex-row gap-4 items-center">
           <span
-            className="border border-slate-500 hover:border-slate-400 w-5 h-4 rounded-sm bg-white flex items-center justify-center transition-all duration-200"
+            className="border border-slate-500 hover:border-slate-400 min-w-4 max-w-4 min-h-4 max-h-4 rounded-sm bg-white flex items-center justify-center transition-all duration-200"
             onClick={handleSelectFile}>
             {selected && (
               <svg
@@ -117,7 +118,7 @@ const FilesWrapper = ({
       onContextMenu={handleMouseClick}>
       <div className="flex flex-row gap-4 items-center">
         <span
-          className="border border-slate-500 w-4 h-4 rounded-sm bg-white flex items-center justify-center"
+          className="border border-slate-500 min-w-4 max-w-4 min-h-4 max-h-4 rounded-sm bg-white flex items-center justify-center"
           onClick={handleSelectFile}>
           {selected && (
             <svg
@@ -138,6 +139,9 @@ const FilesWrapper = ({
         {translateFormatToIcon(file.format)}
 
         <span className="text-lg">{fileNameFormat(file.fileName)}</span>
+        <span className="text-md text-slate-400">
+          {dateFormatter(file.date)}
+        </span>
       </div>
 
       <div className="flex items-center gap-4">
