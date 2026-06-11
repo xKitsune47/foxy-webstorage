@@ -7,15 +7,12 @@ import FileList from "./_components/FileList";
 import FilesWrapper from "./_components/FilesWrapper";
 import { ChangeEventHandler, SubmitEventHandler, useState } from "react";
 import RecentlyAddedFiles from "./_components/RecentlyAddedFiles";
-import ScreenPopup from "./_components/ScreenPopup";
-import dateFormatter from "./helpers/dateFormatter";
-import fileWeightFormatter from "./helpers/fileWeightFormatter";
 import regexTester from "./helpers/regexTester";
-import PopupButtonWrapper from "./_components/PopupButtonWrapper";
-import Button from "./_components/Button";
 import removePrecedingWhitespaces from "./helpers/removePrecedingWhitespaces";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import Popups from "./_components/Popups";
 
-const files: File[] = [
+const tempFiles: File[] = [
   {
     id: 1,
     fileName: "Lorem ipsum",
@@ -139,10 +136,13 @@ const files: File[] = [
 ];
 
 export default function Home() {
+  const [files, setFiles] = useState<File[]>(tempFiles);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searched, setSearched] = useState<boolean>(false);
   const [filesFound, setFilesFound] = useState<File[]>([]);
   const [fileDeletionPopup, setFileDeletionPopup] = useState<boolean>(false);
+  const [fileMassDeletionPopup, setFileMassDeletionPopup] =
+    useState<boolean>(false);
   const [fileSharePopup, setFileSharePopup] = useState<boolean>(false);
   const [fileNameChangePopup, setFileNameChangePopup] =
     useState<boolean>(false);
@@ -183,6 +183,7 @@ export default function Home() {
   };
 
   const handleClosePopup = () => {
+    setFileMassDeletionPopup(false);
     setFileDeletionPopup(false);
     setFileSharePopup(false);
     setFileDetailsPopup(false);
@@ -190,14 +191,18 @@ export default function Home() {
     setFileID(null);
   };
 
-  // confirmations
   const handleDeleteFile = () => {
-    files.filter((file) => file.id !== fileID);
+    setFiles(files.filter((file) => file.id !== fileID));
+    handleClosePopup();
+  };
+
+  const handleMassDeleteFiles = () => {
+    setFiles(files.filter((file) => !filesSelected.includes(file.id)));
+    setFilesSelected([]);
     handleClosePopup();
   };
 
   const handleShareFile = () => {
-    console.log(fileID);
     handleClosePopup();
   };
 
@@ -281,7 +286,17 @@ export default function Home() {
             selectedFiles={filesSelected}
           />
 
-          <h3 className="lg:text-3xl md:text-2xl text-xl">Files</h3>
+          <div className="flex flex-row items-center w-full justify-between">
+            <h3 className="lg:text-3xl md:text-2xl text-xl">Files</h3>
+            {filesSelected.length > 0 && (
+              <span
+                className="flex flex-row items-center hover:text-red-700 transition-all duration-200 cursor-pointer"
+                onClick={() => setFileMassDeletionPopup(true)}>
+                Delete selected files <TrashIcon className="size-8" />
+              </span>
+            )}
+          </div>
+
           <div className="flex flex-col lg:flex-row flex-1 min-h-0 gap-8">
             <FileUpload
               onFiles={(files) => {
@@ -298,101 +313,22 @@ export default function Home() {
         </div>
       )}
 
-      {fileDeletionPopup && singularFile && (
-        <ScreenPopup cancelPopup={handleClosePopup}>
-          <h3 className="text-xl font-semibold">Delete file</h3>
-          <p>
-            Are you sure you want to delete this file? It&apos;ll stay in the
-            &quot;Trash&quot; for 30 days.
-          </p>
-
-          <PopupButtonWrapper>
-            <Button onClick={handleClosePopup} />
-            <Button
-              onClick={handleDeleteFile}
-              btnType="destroy"
-              text="Delete"
-            />
-          </PopupButtonWrapper>
-        </ScreenPopup>
-      )}
-
-      {fileSharePopup && singularFile && (
-        <ScreenPopup cancelPopup={handleClosePopup}>
-          <h3 className="text-xl font-semibold">Share file</h3>
-          <p>placeholder</p>
-
-          <PopupButtonWrapper>
-            <Button onClick={handleClosePopup} />
-            <Button
-              onClick={handleShareFile}
-              btnType="acknowledge"
-              text="Share"
-            />
-          </PopupButtonWrapper>
-        </ScreenPopup>
-      )}
-
-      {fileNameChangePopup && singularFile && (
-        <ScreenPopup cancelPopup={handleClosePopup}>
-          <h3 className="text-xl font-semibold">Change file name</h3>
-          <input
-            type="text"
-            className="border-2 border-slate-200 rounded-xl py-2 px-2 md:w-80 w-40
-           focus:outline-none focus:ring-0 transition-all duration-300 focus:border-orange-300 text-lg"
-            value={newFileName}
-            onChange={handleFileNameQuery}
-            maxLength={50}
-          />
-
-          <PopupButtonWrapper>
-            <Button onClick={handleClosePopup} />
-            <Button
-              onClick={handleChangeNameFile}
-              btnType="confirm"
-              text="Confirm"
-            />
-          </PopupButtonWrapper>
-        </ScreenPopup>
-      )}
-
-      {fileDetailsPopup && singularFile && (
-        <ScreenPopup cancelPopup={handleClosePopup}>
-          <h3 className="text-xl font-semibold">File details</h3>
-          <div className="flex flex-row justify-between gap-16 w-full">
-            <p className="">Name</p>
-            <p>{singularFile.fileName}</p>
-          </div>
-          <hr className="w-full" />
-
-          <div className="flex flex-row justify-between gap-16 w-full">
-            <p className="">Format</p>
-            <p>.{singularFile.format}</p>
-          </div>
-          <hr className="w-full" />
-
-          <div className="flex flex-row justify-between gap-16 w-full">
-            <p>Date</p>
-            <p>{dateFormatter(singularFile.date)}</p>
-          </div>
-          <hr className="w-full" />
-
-          <div className="flex flex-row justify-between gap-16 w-full">
-            <p>Size</p>
-            <p>{fileWeightFormatter(singularFile.size)}</p>
-          </div>
-          <hr className="w-full" />
-
-          <div className="flex flex-row justify-between gap-16 w-full">
-            <p>Shared</p>
-            <p>{singularFile.shared ? "Yes" : "No"}</p>
-          </div>
-
-          <PopupButtonWrapper>
-            <Button onClick={handleClosePopup} text="Close" />
-          </PopupButtonWrapper>
-        </ScreenPopup>
-      )}
+      <Popups
+        file={singularFile}
+        handleClosePopup={handleClosePopup}
+        fileMassDeletionPopup={fileMassDeletionPopup}
+        fileDeletionPopup={fileDeletionPopup}
+        fileSharePopup={fileSharePopup}
+        fileNameChangePopup={fileNameChangePopup}
+        fileDetailsPopup={fileDetailsPopup}
+        filesSelectedLength={0}
+        handleMassDeleteFiles={handleMassDeleteFiles}
+        handleDeleteFile={handleDeleteFile}
+        handleShareFile={handleShareFile}
+        handleFileNameQuery={handleFileNameQuery}
+        newFileName={newFileName}
+        handleChangeNameFile={handleChangeNameFile}
+      />
     </ListLayout>
   );
 }

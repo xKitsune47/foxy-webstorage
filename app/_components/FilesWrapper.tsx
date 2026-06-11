@@ -1,3 +1,5 @@
+"use client";
+
 import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import FileOptions from "./FileOptions";
 import fileWeightFormatter from "../helpers/fileWeightFormatter";
@@ -54,7 +56,7 @@ const FilesWrapper = ({
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setSelected(selectedFiles.includes(file.id));
+    setSelected(selectedFiles?.includes(file.id));
   }, [selectedFiles]);
 
   if (listType === "vertical") {
