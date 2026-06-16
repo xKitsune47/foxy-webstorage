@@ -5,7 +5,7 @@ import FileOptions from "./FileOptions";
 import fileWeightFormatter from "../helpers/fileWeightFormatter";
 import fileNameFormat from "../helpers/fileNameFormatter";
 import translateFormatToIcon from "../helpers/fileFormatIcons";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
+import { CheckIcon, EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { File, PopupTypes } from "../helpers/types";
 import dateFormatter from "../helpers/dateFormatter";
 
@@ -70,21 +70,7 @@ const FilesWrapper = ({
           <span
             className="border border-slate-500 hover:border-slate-400 min-w-4 max-w-4 min-h-4 max-h-4 rounded-sm bg-white flex items-center justify-center transition-all duration-200"
             onClick={handleSelectFile}>
-            {selected && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-4">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m4.5 12.75 6 6 9-13.5"
-                />
-              </svg>
-            )}
+            {selected && <CheckIcon className="size-4" />}
           </span>
           {translateFormatToIcon(file.format)}
           <div className="flex flex-col">
@@ -122,21 +108,7 @@ const FilesWrapper = ({
         <span
           className="border border-slate-500 min-w-4 max-w-4 min-h-4 max-h-4 rounded-sm bg-white flex items-center justify-center"
           onClick={handleSelectFile}>
-          {selected && (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-4">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"
-              />
-            </svg>
-          )}
+          {selected && <CheckIcon className="size-4" />}
         </span>
         {translateFormatToIcon(file.format)}
 
