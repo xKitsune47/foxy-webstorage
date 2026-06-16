@@ -19,4 +19,19 @@ interface PopupFunctions {
   name: () => void;
 }
 
-export type { File, ButtonTypes, PopupTypes, PopupFunctions };
+interface SortingOptions {
+  byName: { isActive: boolean; direction: "asc" | "desc" };
+  byDate: { isActive: boolean; direction: "asc" | "desc" };
+  bySize: { isActive: boolean; direction: "asc" | "desc" };
+}
+
+type SortingTypes = "abc" | "date" | "size";
+
+export type {
+  File,
+  ButtonTypes,
+  PopupTypes,
+  PopupFunctions,
+  SortingOptions,
+  SortingTypes,
+};

@@ -38,7 +38,7 @@ const RecentlyAddedFiles = ({
       <div className="flex flex-col xl:hidden justify-between max:lg gap-2">
         {files.map((file, i) => {
           return (
-            i < maxFilesHorizontal - 2 && (
+            i < maxFilesHorizontal - 3 && (
               <FilesWrapper
                 key={file.id}
                 file={file}

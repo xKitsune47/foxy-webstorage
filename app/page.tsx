@@ -2,7 +2,12 @@
 
 import ListLayout from "./_components/ListLayout";
 import FileUpload from "./_components/FileUpload";
-import { File, PopupTypes } from "./helpers/types";
+import {
+  File,
+  PopupTypes,
+  SortingOptions,
+  SortingTypes,
+} from "./helpers/types";
 import FileList from "./_components/FileList";
 import FilesWrapper from "./_components/FilesWrapper";
 import { ChangeEventHandler, SubmitEventHandler, useState } from "react";
@@ -11,129 +16,8 @@ import regexTester from "./helpers/regexTester";
 import removePrecedingWhitespaces from "./helpers/removePrecedingWhitespaces";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import Popups from "./_components/Popups";
-
-const tempFiles: File[] = [
-  {
-    id: 1,
-    fileName: "Lorem ipsum",
-    format: "pdf",
-    size: 2100000000,
-    date:
-      Date.now() +
-      (Math.random() > 0.5
-        ? -Math.floor(Math.random() * 1000000000)
-        : Math.floor(Math.random() * 1000000000)),
-    shared: Math.random() > 0.5 ? true : false,
-  },
-  {
-    id: 2,
-    fileName: "Lorem ipsum",
-    format: "mp3",
-    size: 210000000,
-    date:
-      Date.now() +
-      (Math.random() > 0.5
-        ? -Math.floor(Math.random() * 1000000000)
-        : Math.floor(Math.random() * 1000000000)),
-    shared: Math.random() > 0.5 ? true : false,
-  },
-  {
-    id: 3,
-    fileName: "Lorem ipsum",
-    format: "doc",
-    size: 21000000,
-    date:
-      Date.now() +
-      (Math.random() > 0.5
-        ? -Math.floor(Math.random() * 1000000000)
-        : Math.floor(Math.random() * 1000000000)),
-    shared: Math.random() > 0.5 ? true : false,
-  },
-  {
-    id: 4,
-    fileName: "Lorem ipsum",
-    format: "ppt",
-    size: 2100000,
-    date:
-      Date.now() +
-      (Math.random() > 0.5
-        ? -Math.floor(Math.random() * 1000000000)
-        : Math.floor(Math.random() * 1000000000)),
-    shared: Math.random() > 0.5 ? true : false,
-  },
-  {
-    id: 5,
-    fileName: "Lorem ipsum",
-    format: "docx",
-    size: 210000,
-    date:
-      Date.now() +
-      (Math.random() > 0.5
-        ? -Math.floor(Math.random() * 1000000000)
-        : Math.floor(Math.random() * 1000000000)),
-    shared: Math.random() > 0.5 ? true : false,
-  },
-  {
-    id: 6,
-    fileName: "Lorem ipsum",
-    format: "pdf",
-    size: 210000,
-    date:
-      Date.now() +
-      (Math.random() > 0.5
-        ? -Math.floor(Math.random() * 1000000000)
-        : Math.floor(Math.random() * 1000000000)),
-    shared: Math.random() > 0.5 ? true : false,
-  },
-  {
-    id: 7,
-    fileName: "Lorem ipsum",
-    format: "xlsx",
-    size: 210000,
-    date:
-      Date.now() +
-      (Math.random() > 0.5
-        ? -Math.floor(Math.random() * 1000000000)
-        : Math.floor(Math.random() * 1000000000)),
-    shared: Math.random() > 0.5 ? true : false,
-  },
-  {
-    id: 8,
-    fileName: "Lorem ipsum",
-    format: "doc",
-    size: 210000,
-    date:
-      Date.now() +
-      (Math.random() > 0.5
-        ? -Math.floor(Math.random() * 1000000000)
-        : Math.floor(Math.random() * 1000000000)),
-    shared: Math.random() > 0.5 ? true : false,
-  },
-  {
-    id: 9,
-    fileName: "Lorem ipsum",
-    format: "ppt",
-    size: 210000,
-    date:
-      Date.now() +
-      (Math.random() > 0.5
-        ? -Math.floor(Math.random() * 1000000000)
-        : Math.floor(Math.random() * 1000000000)),
-    shared: Math.random() > 0.5 ? true : false,
-  },
-  {
-    id: 10,
-    fileName: "Lorem ipsum",
-    format: "docx",
-    size: 210000,
-    date:
-      Date.now() +
-      (Math.random() > 0.5
-        ? -Math.floor(Math.random() * 1000000000)
-        : Math.floor(Math.random() * 1000000000)),
-    shared: Math.random() > 0.5 ? true : false,
-  },
-];
+import { tempFiles } from "./helpers/temporatyFiles";
+import SortingOptionsButtons from "./_components/SortingOptionsButtons";
 
 export default function Home() {
   const [files, setFiles] = useState<File[]>(tempFiles);
@@ -150,9 +34,21 @@ export default function Home() {
   const [fileID, setFileID] = useState<number | null>(null);
   const [filesSelected, setFilesSelected] = useState<number[]>([]);
   const [singularFile, setSingularFile] = useState<File | null>(null);
-
-  // for popups
   const [newFileName, setNewFileName] = useState<string>("");
+  const [sorting, setSorting] = useState<SortingOptions>({
+    byName: {
+      isActive: false,
+      direction: "asc",
+    },
+    byDate: {
+      isActive: false,
+      direction: "asc",
+    },
+    bySize: {
+      isActive: false,
+      direction: "asc",
+    },
+  });
 
   const handleOpenPopup = (popupType: PopupTypes, fileId: number) => {
     const temporaryFile = files.find((file) => file.id === fileId);
@@ -253,6 +149,44 @@ export default function Home() {
     }
   };
 
+  const handleSorting = (sortingType: SortingTypes) => {
+    const comparators: Record<
+      SortingTypes,
+      (a: File, b: File, dir: "asc" | "desc") => number
+    > = {
+      abc: (a, b, dir) =>
+        (dir === "asc" ? 1 : -1) *
+        a.fileName.toLowerCase().localeCompare(b.fileName.toLowerCase()),
+      date: (a, b, dir) =>
+        (dir === "asc" ? 1 : -1) *
+        (new Date(a.date).getTime() - new Date(b.date).getTime()),
+      size: (a, b, dir) => (dir === "asc" ? 1 : -1) * (a.size - b.size),
+    };
+
+    const keyMap: Record<SortingTypes, "byName" | "byDate" | "bySize"> = {
+      abc: "byName",
+      date: "byDate",
+      size: "bySize",
+    };
+
+    const key = keyMap[sortingType];
+    const wasActive = sorting[key].isActive;
+    const currentDir = sorting[key].direction;
+    const newDir = wasActive && currentDir === "asc" ? "desc" : "asc";
+
+    const resetSorting: SortingOptions = {
+      byName: { isActive: false, direction: "asc" },
+      byDate: { isActive: false, direction: "asc" },
+      bySize: { isActive: false, direction: "asc" },
+    };
+
+    setSorting({
+      ...resetSorting,
+      [key]: { isActive: true, direction: newDir },
+    });
+    setFiles([...files].sort((a, b) => comparators[sortingType](a, b, newDir)));
+  };
+
   return (
     <ListLayout
       headerFieldChange={handleFieldChange}
@@ -287,14 +221,22 @@ export default function Home() {
           />
 
           <div className="flex flex-row items-center w-full justify-between">
-            <h3 className="lg:text-3xl md:text-2xl text-xl">Files</h3>
-            {filesSelected.length > 0 && (
-              <span
-                className="flex flex-row items-center hover:text-red-700 transition-all duration-200 cursor-pointer"
-                onClick={() => setFileMassDeletionPopup(true)}>
-                Delete selected files <TrashIcon className="size-8" />
-              </span>
-            )}
+            <div className="flex flex-row gap-4">
+              <h3 className="lg:text-3xl md:text-2xl text-xl">Files</h3>
+              {filesSelected.length > 0 && (
+                <span
+                  className="flex flex-row items-center hover:text-red-700 transition-all duration-200 cursor-pointer"
+                  onClick={() => setFileMassDeletionPopup(true)}>
+                  <TrashIcon className="size-8" />
+                </span>
+              )}
+            </div>
+            <div className="flex flex-row gap-3">
+              <SortingOptionsButtons
+                sortingStates={sorting}
+                onClick={handleSorting}
+              />
+            </div>
           </div>
 
           <div className="flex flex-col lg:flex-row flex-1 min-h-0 gap-8">
