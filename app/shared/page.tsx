@@ -116,11 +116,8 @@ export default function Home() {
 
   const handleSelectFile = (fileId: number) => {
     if (filesSelected.includes(fileId)) {
-      console.log(filesSelected.filter((file) => file !== fileId));
       setFilesSelected(filesSelected.filter((file) => file !== fileId));
     } else {
-      console.log([...filesSelected, fileId]);
-
       setFilesSelected([...filesSelected, fileId]);
     }
   };
